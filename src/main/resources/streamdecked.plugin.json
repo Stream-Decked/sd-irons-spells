@@ -1,0 +1,7 @@
+{
+  "plugins": [
+    {
+      "class": "dev.wolfieboy09.sdironspells.SDIronSpellsPlugin"
+    }
+  ]
+}
