@@ -1,8 +1,6 @@
 package dev.wolfieboy09.sdironspells;
 
-import dev.wolfieboy09.sd5j.button.DeckText;
 import dev.wolfieboy09.sd5j.button.NamedButton;
-import dev.wolfieboy09.sd5j.deck.DeckModel;
 import dev.wolfieboy09.sd5j.layout.DeckPaginator;
 import dev.wolfieboy09.sd5j.layout.DeckSurface;
 import dev.wolfieboy09.streamdecked.client.DeckTextures;
@@ -28,8 +26,6 @@ import javax.annotation.ParametersAreNonnullByDefault;
 @MethodsReturnNonnullByDefault
 public class SDIronSpellsPlugin implements StreamDeckedPlugin {
     private static final String ID = "spells";
-
-    private static final int NAV_KEYS = 3;
 
     private static DeckSurface live;
 
@@ -86,11 +82,10 @@ public class SDIronSpellsPlugin implements StreamDeckedPlugin {
     }
 
     private static DeckPaginator<AbstractSpell> paginate(DeckSurface surface, List<AbstractSpell> spells, Player player, boolean navigation) {
-        DeckModel model = surface.model();
         DeckPaginator<AbstractSpell> pages =
-                DeckPaginator.of(model, spells, spell -> button(spell, player));
+                DeckPaginator.of(surface.model(), spells, spell -> button(spell, player));
         if (!navigation) return pages.noNavigation();
-        if (model.keyCount() > NAV_KEYS) pages.previous();
+        pages.previousIfRoom();
         return pages;
     }
 
